@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Update Contact</h1>    
+    <div class="content">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.first_name.label(class='')}}
+                {% if form.first_name.errors %}
+                    {{ form.first_name(class='something')}}
+                    {% for error in form.first_name.errors %}
+                        <span class="invalid-feedback">{{ error }}</span>
+                    {% endfor %}
+                {% else %}
+                    {{ form.first_name(class='something')}}
+                {% endif%}
+            </div>
+            <div class="form-group">
+                {{ form.last_name.label(class='')}}
+                {% if form.last_name.errors %}
+                    {{ form.last_name(class='something')}}
+                    {% for error in form.last_name.errors %}
+                        <span class="invalid-feedback">{{ error }}</span>
+                    {% endfor %}
+                {% else %}
+                    {{ form.last_name(class='something')}}
+                {% endif%}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class='')}}
+                {% if form.email.errors %}
+                    {{ form.email(class='something')}}
+                    {% for error in form.email.errors %}
+                        <span class="invalid-feedback">{{ error }}</span>
+                    {% endfor %}
+                {% else %}
+                    {{ form.email(class='something')}}
+                {% endif%}
+            </div>
+            <div class="form-group">
+                {{ form.number.label(class='')}}
+                {% if form.number.errors %}
+                    {{ form.number(class='something')}}
+                    {% for error in form.number.errors %}
+                        <span class="invalid-feedback">{{ error }}</span>
+                    {% endfor %}
+                {% else %}
+                    {{ form.number(class='something')}}
+                {% endif%}
+            </div>
+            <div class="submit-btn">
+                {{form.submit}}
+            </div>
+        </form>
+    </div>
+{% endblock %}
