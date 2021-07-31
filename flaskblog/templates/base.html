@@ -7,6 +7,17 @@
     <title>Flask Agenda</title>
 </head>
 <body>
+    <nav>
+        <h1><a href="{{ url_for('index')}}">Flask Agenda</a></h1>
+        <a href="{{ url_for('index')}}">Home</a>
+        {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('login')}}">Login</a>
+            <a href="{{ url_for('register')}}">Register</a>
+        {% else %}
+            <a href="{{ url_for('logout')}}">Logout</a>
+            <a href="{{ url_for('dashboard')}}">Dashboard</a>
+        {% endif %}
+    </nav>
     {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
             {% for category, message in messages %}

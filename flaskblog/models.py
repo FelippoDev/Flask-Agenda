@@ -1,4 +1,4 @@
-from flaskblog import db
+from flaskblog import db, app
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from datetime import datetime
@@ -10,6 +10,23 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(60), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     contacts = db.relationship('Contact', backref='owner', lazy=True)
+
+
+    def generate_token(self, expires_sec=1800):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id' : self.id})
+
+
+    @staticmethod
+    def check_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+
+        return User.query.get(user_id)
+
 
 
 class Contact(db.Model):

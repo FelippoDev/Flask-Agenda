@@ -51,3 +51,22 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(),Email()])
     number = IntegerField('Phone Number', validators=[DataRequired()])
     submit = SubmitField('Updated Contact')
+
+
+class ResetRequestForm(FlaskForm):
+        email = StringField('Email', validators=[DataRequired(),Email()])
+        submit = SubmitField('Request password reset')
+
+        def email_validate(email):
+            user = User.query.filter_by(email=email.data).first()
+            if not user:
+                raise ValidationError("There isn't an account with that email.")
+
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired(), Length(max=60)])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
+
+    
