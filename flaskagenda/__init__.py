@@ -29,4 +29,4 @@ mail = Mail(app)
 bcrypt = Bcrypt(app)
 
 
-from flaskblog import routes
+from flaskagenda import routes

@@ -6,9 +6,9 @@
         <form action="" method="POST">
             {{ form.hidden_tag() }}
             <div class="form-group">
-                {{ form.first_name.label(class='')}}
+                {{ form.first_name.label(class='form-control-label')}}
                 {% if form.first_name.errors %}
-                    {{ form.first_name(class='something')}}
+                    {{ form.first_name('form-control form-control-lg is-invalid')}}
                     {% for error in form.first_name.errors %}
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}
@@ -17,9 +17,9 @@
                 {% endif%}
             </div>
             <div class="form-group">
-                {{ form.last_name.label(class='')}}
+                {{ form.last_name.label(class='form-control-label')}}
                 {% if form.last_name.errors %}
-                    {{ form.last_name(class='something')}}
+                    {{ form.last_name('form-control form-control-lg is-invalid')}}
                     {% for error in form.last_name.errors %}
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}
@@ -28,9 +28,9 @@
                 {% endif%}
             </div>
             <div class="form-group">
-                {{ form.email.label(class='')}}
+                {{ form.email.label(class='form-control-label')}}
                 {% if form.email.errors %}
-                    {{ form.email(class='something')}}
+                    {{ form.email('form-control form-control-lg is-invalid')}}
                     {% for error in form.email.errors %}
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}
@@ -39,9 +39,9 @@
                 {% endif%}
             </div>
             <div class="form-group">
-                {{ form.number.label(class='')}}
+                {{ form.number.label(class='form-control-label')}}
                 {% if form.number.errors %}
-                    {{ form.number(class='something')}}
+                    {{ form.number('form-control form-control-lg is-invalid')}}
                     {% for error in form.number.errors %}
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}

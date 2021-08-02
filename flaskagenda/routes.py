@@ -1,9 +1,9 @@
 from flask_login.config import EXEMPT_METHODS
-from flaskblog.forms import LoginForm, RegisterForm, ContactForm, UpdateAccountForm, ResetRequestForm, ResetPasswordForm
-from flaskblog import app, db, bcrypt, login_manager, mail
+from flaskagenda.forms import LoginForm, RegisterForm, ContactForm, UpdateAccountForm, ResetRequestForm, ResetPasswordForm
+from flaskagenda import app, db, bcrypt, login_manager, mail
 from flask.helpers import flash, url_for
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-from flaskblog.models import User, Contact
+from flaskagenda.models import User, Contact
 from flask_mail import Mail, Message
 from flask import Flask, render_template, redirect, request, abort
 import os
@@ -17,8 +17,15 @@ def load_user(id):
 
 
 @app.route("/")
+@login_required
 def index():
-    contacts = Contact.query.order_by(Contact.data_created).all()
+    search = request.args.get('search')
+    if search:
+        contacts = Contact.query.filter(Contact.first_name.contains(search) | 
+        Contact.last_name.contains(search) | Contact.email.contains(search)).filter_by(user_id=current_user.id).all()
+    else:
+        contacts = Contact.query.filter_by(user_id=current_user.id).all()
+        
     return render_template('index.html', contacts=contacts)
 
 

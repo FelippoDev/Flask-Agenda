@@ -4,7 +4,7 @@ from flask_wtf.recaptcha import validators
 from wtforms import StringField, PasswordField, TextAreaField, BooleanField, SubmitField, IntegerField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, Length, Email, EqualTo, NumberRange, ValidationError
-from flaskblog.models import User
+from flaskagenda.models import User
 
 
 
@@ -22,14 +22,14 @@ class RegisterForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register Me')
 
-    def validate_username(username):
-        user = User.query.filter_by(username=username.data)
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('Already is an account with that username. Please choose a different one.')
 
 
-    def validate_email(email):
-        user = User.query.filter_by(email=email.data)
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Already is an account with that email. Please choose a different one.')
 
@@ -54,10 +54,10 @@ class UpdateAccountForm(FlaskForm):
 
 
 class ResetRequestForm(FlaskForm):
-        email = StringField('Email', validators=[DataRequired(),Email()])
+        email = StringField('Email', validators=[DataRequired(), Email()])
         submit = SubmitField('Request password reset')
 
-        def email_validate(email):
+        def validate_email(self, email):
             user = User.query.filter_by(email=email.data).first()
             if not user:
                 raise ValidationError("There isn't an account with that email.")
