@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
-<form action="" class="form-inline">
-    <input type="search" name="search" class="form-control mr-sm-2 my-2" placeholder="Search">
-    <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
-</form>
+    <form action="" class="form-inline">
+        <input type="search" name="search" class="form-control mr-sm-2 my-2" placeholder="Search">
+        <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
+    </form>
     <table  class="table table-hover table-responsive-lg my-5">
         <caption>List of contacts</caption>
         <thead>
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             {% if contacts %}
-                {% for contact in contacts %}
+                {% for contact in contacts.items %}
                     <tr>
                         <td>{{ contact.first_name }}</td>
                         <td>{{ contact.last_name }}</td>
@@ -31,4 +31,15 @@
             {% endif %}
         </tbody>
     </table>
+    {% for page_num in contacts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {%if contacts.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+            {%else%}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+            {%endif%}
+        {%else%}
+            ...
+        {%endif%}
+    {% endfor %}
 {%endblock%}

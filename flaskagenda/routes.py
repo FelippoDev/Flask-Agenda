@@ -19,12 +19,13 @@ def load_user(id):
 @app.route("/")
 @login_required
 def index():
+    page = request.args.get('page', 1, type=int)
     search = request.args.get('search')
     if search:
         contacts = Contact.query.filter(Contact.first_name.contains(search) | 
-        Contact.last_name.contains(search) | Contact.email.contains(search)).filter_by(user_id=current_user.id).all()
+        Contact.last_name.contains(search) | Contact.email.contains(search)).filter_by(user_id=current_user.id).paginate(page=page, per_page=2)
     else:
-        contacts = Contact.query.filter_by(user_id=current_user.id).all()
+        contacts = Contact.query.filter_by(user_id=current_user.id).paginate(page=page, per_page=6)
         
     return render_template('index.html', contacts=contacts)
 

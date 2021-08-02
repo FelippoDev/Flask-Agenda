@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>Update Contact</h1>    
-    <div class="content">
+    <div class="content-section">
         <form action="" method="POST">
             {{ form.hidden_tag() }}
+            <fieldset class="form-group my-1">
+                <legend class="border-bottom mb-4 ">Update Contact</legend>
             <div class="form-group">
                 {{ form.first_name.label(class='form-control-label')}}
                 {% if form.first_name.errors %}
@@ -13,7 +14,7 @@
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}
                 {% else %}
-                    {{ form.first_name(class='something')}}
+                    {{ form.first_name(class="form-control form-control-lg")}}
                 {% endif%}
             </div>
             <div class="form-group">
@@ -24,7 +25,7 @@
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}
                 {% else %}
-                    {{ form.last_name(class='something')}}
+                    {{ form.last_name(class="form-control form-control-lg")}}
                 {% endif%}
             </div>
             <div class="form-group">
@@ -35,7 +36,7 @@
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}
                 {% else %}
-                    {{ form.email(class='something')}}
+                    {{ form.email(class="form-control form-control-lg")}}
                 {% endif%}
             </div>
             <div class="form-group">
@@ -46,12 +47,11 @@
                         <span class="invalid-feedback">{{ error }}</span>
                     {% endfor %}
                 {% else %}
-                    {{ form.number(class='something')}}
+                    {{ form.number(class="form-control form-control-lg")}}
                 {% endif%}
             </div>
-            <div class="submit-btn">
-                {{form.submit}}
-            </div>
+             {{form.submit(class="btn btn-outline-info")}}
+            </fieldset>
         </form>
     </div>
 {% endblock %}
