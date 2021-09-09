@@ -11,8 +11,6 @@ import os
 from wtforms.validators import Email
 
 
-
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY_FLASK_AGENDA')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@127.0.0.1:3307/new_agenda_flask'

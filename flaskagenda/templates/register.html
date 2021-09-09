@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
-    <div class="content">
+    <div class="content p-3">
         <form action="" method="POST">
             {{ form.hidden_tag() }}
-            <fieldset class="form-group my-5">
+            <fieldset class="form-group my-3">
                 <legend class="border-bottom mb-4">Register</legend>
                 <div class="form-group">
                     {{ form.username.label(class='form-control-label')}}
@@ -54,6 +54,10 @@
                 {{form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
+        <div class="border-top">
+            <small class="text-muted">
+                Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Log in</a>
+            </small>
+        </div>
     </div>
-    <span class="small">Already have an accout? <a href="{{url_for('login')}}">Log in</a></span>
 {%endblock%}

@@ -23,7 +23,7 @@ def index():
     search = request.args.get('search')
     if search:
         contacts = Contact.query.filter(Contact.first_name.contains(search) | 
-        Contact.last_name.contains(search) | Contact.email.contains(search)).filter_by(user_id=current_user.id).paginate(page=page, per_page=2)
+        Contact.last_name.contains(search) | Contact.email.contains(search)).filter_by(user_id=current_user.id).paginate(page=page, per_page=6)
     else:
         contacts = Contact.query.filter_by(user_id=current_user.id).paginate(page=page, per_page=6)
         
@@ -75,7 +75,7 @@ def dashboard():
         contact = Contact(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, number=form.number.data, user_id=current_user.id)
         db.session.add(contact)
         db.session.commit()
-        flash('Contact created successfully', 'success')
+        flash('Contact created successfully.', 'success')
         return redirect("/")
 
     return render_template('dashboard.html', form=form)
@@ -140,7 +140,7 @@ def reset_request():
         user = User.query.filter_by(email=form.email.data).first()
         send_mail(user)
         flash('An email has been sent with instructions to reset your password.', 'info')
-        return redirect("/")
+        return redirect("/login")
 
     return render_template('reset_request.html', form=form)
 
