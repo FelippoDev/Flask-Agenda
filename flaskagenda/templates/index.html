@@ -28,6 +28,10 @@
                         <td><a href="{{ url_for('delete', id=contact.id)}}"><i class="bi bi-trash"></i></a></td>
                     </tr>
                 {% endfor %}
+            {% else %}
+                    <div class="content">
+                        <h1><strong>You haven't added any contact yet, create a new one in the</strong><a href="./dashboard.html">dashboard</a></h1>
+                    </div>
             {% endif %}
         </tbody>
     </table>
