@@ -1,5 +1,5 @@
 # Flask-Agenda
 
-Agenda criada utilizando o Django Web Framework, para a base de dados foi utilizado PostgreSQL e para as imagens dos contatos foram armazenadas na AWS S3.
+Contact list a.k.a Agenda created using the Flask Web Framework. I deployed this application using AWS EC2 instance.
 
-<a href="http://felippo-agenda.herokuapp.com/">felippo-agenda.com</a>
+<a href="http://18.230.78.216">felippo-agenda.com</a>
